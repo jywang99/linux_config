@@ -17,3 +17,6 @@ set wrap
 " UI
 set cursorline
 
+" copy-paste
+set clipboard=unnamed
+
