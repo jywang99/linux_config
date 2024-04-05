@@ -16,7 +16,7 @@ nvm use 20.5.0
 # XML
 wget https://github.com/redhat-developer/vscode-xml/releases/download/0.26.1/lemminx-linux.zip
 unzip lemminx-linux.zip
-sudo mv le lemminx-linux /usr/bin/
+sudo mv lemminx-linux /usr/bin/
 
 # dotnet
 wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
