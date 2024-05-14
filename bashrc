@@ -183,3 +183,8 @@ export EDITOR="$VISUAL"
 
 # aliases
 alias cdd='cd /mnt/c/Users/junyi/Downloads/' # for WSL
+
+# fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+bind -x '"\ef": "cd && $(__fzf_cd__)"'
+
