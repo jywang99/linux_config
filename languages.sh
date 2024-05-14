@@ -25,6 +25,7 @@ sudo apt update
 rm packages-microsoft-prod.deb
 sudo apt-get install -y dotnet-sdk-6.0 # for N* projects
 sudo apt-get install -y dotnet-sdk-8.0
+
 # dotnet debug
 wget https://github.com/Samsung/netcoredbg/releases/download/3.0.0-1018/netcoredbg-linux-amd64.tar.gz
 tar -xvzf netcoredbg-linux-amd64.tar.gz

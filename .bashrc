@@ -168,8 +168,18 @@ function parse_git_dirty {
 
 export PS1="\[\e[33m\]\u\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]\\$ "
 
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# Maven
+M2_HOME='/opt/apache-maven-3.6.3'
+PATH="$M2_HOME/bin:$PATH"
+export PATH
+
+# set vim as default editor
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+# aliases
+alias cdd='cd /mnt/c/Users/junyi/Downloads/' # for WSL
