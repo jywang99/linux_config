@@ -183,8 +183,14 @@ export EDITOR="$VISUAL"
 
 # aliases
 alias cdd='cd /mnt/c/Users/junyi/Downloads/' # for WSL
+alias tmux="tmux -u"
+alias pu='pushd'
+alias po='popd'
 
-# fzf
+alias tmux="tmux -u"
+alias pu='pushd'
+alias po='popd'
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 bind -x '"\ef": "cd && $(__fzf_cd__)"'
 
