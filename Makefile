@@ -1,0 +1,3 @@
+user:
+	stow -t ~/ home
+
