@@ -70,7 +70,7 @@ ZSH_THEME="gallois"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf zsh-vi-mode)
+plugins=(git zsh-vi-mode fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -121,4 +121,11 @@ alias po='popd'
 
 # keybindings
 fuzcd() {cd $(find ~ | fzf); echo $PWD}; zle -N fuzcd;bindkey '\ef' fuzcd
+
+# fzf has to be initialized after zvm
+function init_fzf() {
+      [ -f /home/jy/.fzf/shell/key-bindings.zsh ] && source /home/jy/.fzf/shell/key-bindings.zsh
+      [ -f /home/jy/.fzf/shell/completion.zsh.zsh ] && source /home/jy/.fzf/shell/completion.zsh.zsh
+}
+zvm_after_init_commands+=(init_fzf)
 
