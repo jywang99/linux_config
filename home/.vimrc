@@ -18,7 +18,7 @@ filetype indent on      " activates indenting for files
 
 " UI
 set cursorline
-colorscheme desert      " colorscheme desert
+colorscheme koehler
 syntax on               " syntax highlighting
 
 " copy-paste

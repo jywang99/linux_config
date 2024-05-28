@@ -73,7 +73,7 @@ ZSH_THEME="gallois"
 function zvm_config() {
     ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 }
-plugins=(git zsh-vi-mode fzf-zsh-plugin)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,11 +85,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='vim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -122,9 +122,12 @@ alias tmux="tmux -u"
 alias pu='pushd'
 alias po='popd'
 
-# keybindings
-fuzcd() {cd $(find ~ | fzf); echo $PWD}; zle -N fuzcd;bindkey '\ef' fuzcd
-
 # fzf has to be initialized after zvm
-zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# keybindings
+fuzcd() {
+    cd $(fd -H -t d -E .git -E node_modules | fzf)
+}
+zle -N fuzcd;bindkey '\ef' fuzcd
 
