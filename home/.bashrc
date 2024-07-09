@@ -1,6 +1,5 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc) for examples
 
 # If not running interactively, don't do anything
 case $- in
@@ -25,7 +24,7 @@ shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-#shopt -s globstar
+shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -39,11 +38,6 @@ fi
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -95,15 +89,6 @@ alias l='ls -CF'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -166,12 +151,9 @@ function parse_git_dirty {
 	fi
 }
 
-export PS1="\[\e[33m\]\u\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]"
-
-# show number of running jobs
+PS1="\[\e[33m\]\u\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]"
 PS1+='`if [ -n "$(jobs -p)" ]; then echo "{\j}"; fi`'
 PS1+="\\$ "
-
 export PS1
 
 # set vim as default editor
@@ -181,49 +163,51 @@ export EDITOR="$VISUAL"
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # fzf
 FZF_DIR="/usr/share/fzf"
-[ -s "$FZF_DIR/key-bindings.bash" ] && \. "$FZF_DIR/key-bindings.bash"
-[ -s "$FZF_DIR/completion.bash" ] && \. "$FZF_DIR/completion.bash"
-
-# Maven
-M2_HOME='/opt/apache-maven-3.6.3'
-PATH="$M2_HOME/bin:$PATH"
-export PATH
-
-# WSL GUI apps
-export DISPLAY=$(ip route list default | awk '{print $3}'):0
-export LIBGL_ALWAYS_INDIRECT=1
-
-# completion
-[ -s "$FZF_DIR/completion.bash" ] && \. "$FZF_DIR/completion.bash"
-
-# Maven
-M2_HOME='/opt/apache-maven-3.6.3'
-PATH="$M2_HOME/bin:$PATH"
-export PATH
+if [ -d "$FZF_DIR" ]; then
+    . "$FZF_DIR/key-bindings.bash"
+    . "$FZF_DIR/completion.bash"
+fi
 
 # WSL
 WSL_PROC_FILE="/proc/sys/fs/binfmt_misc/WSLInterop"
 if [ -f "$WSL_PROC_FILE" ]; then
+    # Windows directories
+    windows_userprofile=$(cd /mnt/c/ && cmd.exe /c "echo %USERPROFILE%" | tr -d '\r')
+    WIN_HOME=$(echo $windows_userprofile | sed 's|\\|/|g' | sed 's|C:|/mnt/c|')
+    if [ -d "$WIN_HOME" ]; then
+        export WIN_HOME
+        export WIN_DL="$WIN_HOME/Downloads"
+        alias cdd='cd $WIN_DL'
+    fi
+
     # GUI apps
     export DISPLAY=$(ip route list default | awk '{print $3}'):0
     export LIBGL_ALWAYS_INDIRECT=1
 fi
 
-# completion
-BASH_COMPLETION_DIR="/usr/share/bash-completion/completions"
-[ -s "$BASH_COMPLETION_DIR/git" ] && \. "$BASH_COMPLETION_DIR/git"
-[ -s "$BASH_COMPLETION_DIR/docker" ] && \. "$BASH_COMPLETION_DIR/docker"
-[ -s "$BASH_COMPLETION_DIR/docker-compose" ] && \. "$BASH_COMPLETION_DIR/docker-compose"
-
 # aliases
-alias cdd='cd /mnt/c/Users/junyi/Downloads/' # for WSL
 alias tmux="tmux -u"
 alias pu='pushd'
 alias po='popd'
+
+# completion
+BASH_COMPLETION_DIR="/usr/share/bash-completion/completions"
+if [ -d "$BASH_COMPLETION_DIR" ]; then
+    . "$BASH_COMPLETION_DIR/git"
+    . "$BASH_COMPLETION_DIR/docker"
+fi
+# user-generated completion scirpts
+USR_COMP_DIR="$HOME/.config/bash_completion"
+if [ -d "$USR_COMP_DIR" ]; then
+    for f in $USR_COMP_DIR/*; do
+        . $f
+    done
+fi
+# completion for aliases
+complete -F __start_kubectl kc
 
 # keybindings
 bind -x '"\ef": "cd && $(__fzf_cd__)"'
