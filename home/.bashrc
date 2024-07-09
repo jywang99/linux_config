@@ -178,22 +178,15 @@ export PS1
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# aliases
-alias cdd='cd /mnt/c/Users/junyi/Downloads/' # for WSL
-alias tmux="tmux -u"
-alias pu='pushd'
-alias po='popd'
-
-# keybindings
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-bind -x '"\ef": "cd && $(__fzf_cd__)"'
-bind 'set keyseq-timeout 0'
-
-# applications
-
+# NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# fzf
+FZF_DIR="/usr/share/fzf"
+[ -s "$FZF_DIR/key-bindings.bash" ] && \. "$FZF_DIR/key-bindings.bash"
+[ -s "$FZF_DIR/completion.bash" ] && \. "$FZF_DIR/completion.bash"
 
 # Maven
 M2_HOME='/opt/apache-maven-3.6.3'
@@ -203,4 +196,36 @@ export PATH
 # WSL GUI apps
 export DISPLAY=$(ip route list default | awk '{print $3}'):0
 export LIBGL_ALWAYS_INDIRECT=1
+
+# completion
+[ -s "$FZF_DIR/completion.bash" ] && \. "$FZF_DIR/completion.bash"
+
+# Maven
+M2_HOME='/opt/apache-maven-3.6.3'
+PATH="$M2_HOME/bin:$PATH"
+export PATH
+
+# WSL
+WSL_PROC_FILE="/proc/sys/fs/binfmt_misc/WSLInterop"
+if [ -f "$WSL_PROC_FILE" ]; then
+    # GUI apps
+    export DISPLAY=$(ip route list default | awk '{print $3}'):0
+    export LIBGL_ALWAYS_INDIRECT=1
+fi
+
+# completion
+BASH_COMPLETION_DIR="/usr/share/bash-completion/completions"
+[ -s "$BASH_COMPLETION_DIR/git" ] && \. "$BASH_COMPLETION_DIR/git"
+[ -s "$BASH_COMPLETION_DIR/docker" ] && \. "$BASH_COMPLETION_DIR/docker"
+[ -s "$BASH_COMPLETION_DIR/docker-compose" ] && \. "$BASH_COMPLETION_DIR/docker-compose"
+
+# aliases
+alias cdd='cd /mnt/c/Users/junyi/Downloads/' # for WSL
+alias tmux="tmux -u"
+alias pu='pushd'
+alias po='popd'
+
+# keybindings
+bind -x '"\ef": "cd && $(__fzf_cd__)"'
+bind 'set keyseq-timeout 0'
 

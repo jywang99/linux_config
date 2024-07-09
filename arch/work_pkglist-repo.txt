@@ -3,6 +3,7 @@ aspell
 autoconf-archive
 base
 base-devel
+bash-completion
 bat
 bc
 bear

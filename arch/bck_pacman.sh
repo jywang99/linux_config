@@ -1,5 +1,9 @@
 #!/bin/bash
 
-pacman -Qqen > ${1:-pkglist-repo.txt}
-pacman -Qqem > ${2:-pkglist-aur.txt}
+if [ -n "$1" ]; then
+    profile=${1}_
+fi
+
+pacman -Qqen > ${profile}pkglist-repo.txt
+pacman -Qqem > ${profile}pkglist-aur.txt
 
