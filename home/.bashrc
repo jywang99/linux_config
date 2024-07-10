@@ -152,7 +152,7 @@ function parse_git_dirty {
 }
 
 PS1="\[\e[33m\]\u\[\e[m\]:\[\e[36m\]\w\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]"
-PS1+='`if [ -n "$(jobs -p)" ]; then echo "{\j}"; fi`'
+PS1+="\[\e[90m\]{\`jobs | grep -E 'Running|Stopped' | wc -l\`}\[\e[m\] "
 PS1+="\\$ "
 export PS1
 
@@ -169,6 +169,11 @@ FZF_DIR="/usr/share/fzf"
 if [ -d "$FZF_DIR" ]; then
     . "$FZF_DIR/key-bindings.bash"
     . "$FZF_DIR/completion.bash"
+fi
+
+# zoxide
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init bash)"
 fi
 
 # WSL
