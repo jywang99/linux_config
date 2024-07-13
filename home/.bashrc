@@ -160,6 +160,20 @@ export PS1
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+# Go
+goBinPath=$(go env GOPATH)/bin
+if [ -d $goBinPath ]; then
+    export PATH=$PATH:$goBinPath
+fi
+
+# Python
+PYENV_ROOT="$HOME/.pyenv"
+if [ -d "$PYENV_ROOT" ]; then
+    export PYENV_ROOT
+    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
+
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -177,8 +191,7 @@ if command -v zoxide &> /dev/null; then
 fi
 
 # WSL
-WSL_PROC_FILE="/proc/sys/fs/binfmt_misc/WSLInterop"
-if [ -f "$WSL_PROC_FILE" ]; then
+if [[ $(grep -i Microsoft /proc/version) ]]; then
     # Windows directories
     windows_userprofile=$(cd /mnt/c/ && cmd.exe /c "echo %USERPROFILE%" | tr -d '\r')
     WIN_HOME=$(echo $windows_userprofile | sed 's|\\|/|g' | sed 's|C:|/mnt/c|')
