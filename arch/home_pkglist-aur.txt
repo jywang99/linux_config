@@ -1,0 +1,5 @@
+cgroup_event_listener
+google-chrome
+rate-mirrors
+yay-bin
+yay-bin-debug
