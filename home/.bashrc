@@ -193,7 +193,7 @@ fi
 # WSL
 if [[ $(grep -i Microsoft /proc/version) ]]; then
     # Windows directories
-    windows_userprofile=$(cd /mnt/c/ && cmd.exe /c "echo %USERPROFILE%" | tr -d '\r')
+    windows_userprofile=$(cd /mnt/c/ && /mnt/c/Windows/system32/cmd.exe /c "echo %USERPROFILE%" | tr -d '\r')
     WIN_HOME=$(echo $windows_userprofile | sed 's|\\|/|g' | sed 's|C:|/mnt/c|')
     if [ -d "$WIN_HOME" ]; then
         export WIN_HOME
