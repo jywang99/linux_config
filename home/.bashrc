@@ -161,8 +161,8 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # Go
-goBinPath=$(go env GOPATH)/bin
-if [ -d $goBinPath ]; then
+if command -v go &> /dev/null; then
+    goBinPath=$(go env GOPATH)/bin
     export PATH=$PATH:$goBinPath
 fi
 
@@ -214,8 +214,8 @@ alias po='popd'
 # completion
 BASH_COMPLETION_DIR="/usr/share/bash-completion/completions"
 if [ -d "$BASH_COMPLETION_DIR" ]; then
-    . "$BASH_COMPLETION_DIR/git"
-    . "$BASH_COMPLETION_DIR/docker"
+    [ -f "$BASH_COMPLETION_DIR/git" ] && . "$BASH_COMPLETION_DIR/git"
+    [ -f "$BASH_COMPLETION_DIR/kubectl" ] && . "$BASH_COMPLETION_DIR/kubectl"
 fi
 # user-generated completion scirpts
 USR_COMP_DIR="$HOME/.config/bash_completion"
