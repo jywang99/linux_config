@@ -214,6 +214,22 @@ alias tmux="tmux -u"
 alias pu='pushd'
 alias po='popd'
 
+function sshAndRenameTmux() {
+    if [ -z "$1" ]; then
+        echo "Usage: sshAndRenameTmux <hostname>"
+        return 1
+    fi
+
+    ORIG_WINDOW_NAME=$(tmux display-message -p '#W')
+    tmux rename-window $1
+    cleanup() {
+        tmux rename-window "$ORIG_WINDOW_NAME"
+    }
+    trap cleanup RETURN
+    ssh $1
+}
+alias ssh=sshAndRenameTmux
+
 # completion
 BASH_COMPLETION_DIR="/usr/share/bash-completion/completions"
 if [ -d "$BASH_COMPLETION_DIR" ]; then
@@ -221,7 +237,7 @@ if [ -d "$BASH_COMPLETION_DIR" ]; then
     [ -f "$BASH_COMPLETION_DIR/kubectl" ] && . "$BASH_COMPLETION_DIR/kubectl"
 fi
 # user-generated completion scirpts
-USR_COMP_DIR="$HOME/.config/bash_completion"
+USR_COMP_DIR="$HOME/.config/bash-completion"
 if [ -d "$USR_COMP_DIR" ]; then
     for f in $USR_COMP_DIR/*; do
         . $f
