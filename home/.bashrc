@@ -156,6 +156,8 @@ PS1+="\[\e[90m\]{\`jobs | grep -E 'Running|Stopped' | wc -l\`}\[\e[m\]"
 PS1+="\\$ "
 export PS1
 
+export XDG_CONFIG_HOME=$HOME/.config
+
 # set vim as default editor
 export VISUAL=vim
 export EDITOR="$VISUAL"
@@ -240,7 +242,7 @@ if [ -d "$BASH_COMPLETION_DIR" ]; then
     [ -f "$BASH_COMPLETION_DIR/kubectl" ] && . "$BASH_COMPLETION_DIR/kubectl"
 fi
 # user-generated completion scirpts
-USR_COMP_DIR="$HOME/.config/bash-completion"
+USR_COMP_DIR="$XDG_CONFIG_HOME/bash-completion"
 if [ -d "$USR_COMP_DIR" ]; then
     for f in $USR_COMP_DIR/*; do
         . $f
@@ -252,4 +254,12 @@ complete -F __start_kubectl kc
 # keybindings
 bind -x '"\ef": "cd && $(__fzf_cd__)"'
 bind 'set keyseq-timeout 0'
+
+# other user scripts
+SCRIPTS_DIR="$XDG_CONFIG_HOME/launch"
+if [ -d "$SCRIPTS_DIR" ]; then
+    for f in $SCRIPTS_DIR/*; do
+        . $f
+    done
+fi
 
