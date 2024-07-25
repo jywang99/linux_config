@@ -1,4 +1,4 @@
 user:
-	mkdir -p ~/.config
+	mkdir -p ~/.config/tmux/plugins
 	stow -t ~/ home
 

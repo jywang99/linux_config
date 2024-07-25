@@ -220,10 +220,13 @@ function sshAndRenameTmux() {
         return 1
     fi
 
+    ORIG_AUTO_RENAME=$(tmux show-option -g automatic-rename)
     ORIG_WINDOW_NAME=$(tmux display-message -p '#W')
     tmux rename-window $1
+
     cleanup() {
         tmux rename-window "$ORIG_WINDOW_NAME"
+        tmux setw $ORIG_AUTO_RENAME
     }
     trap cleanup RETURN
     ssh $1
