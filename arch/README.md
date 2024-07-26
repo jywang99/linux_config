@@ -1,15 +1,5 @@
-# Linux Configs
-My Linux configuration files and scripts.
-
-## Dotfiles
-1. Install [Stow](https://www.gnu.org/software/stow/)
-2. Apply dotfiles
-```bash
-make user
-```
-
-## Arch packages
-This part is inspired by [this](https://github.com/bruhtus/package-backup) repository.
+# Arch packages backup
+Inspired by [this](https://github.com/bruhtus/package-backup) repository.
 
 Everything related to Arch is in the `arch` directory.
 ```bash
