@@ -1,3 +1,4 @@
+blesh-git
 cgroup_event_listener
 google-chrome
 rate-mirrors

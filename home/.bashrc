@@ -1,6 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc) for examples
 
+export XDG_CONFIG_HOME=$HOME/.config
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -161,8 +163,6 @@ else
     export PS1
 fi
 
-export XDG_CONFIG_HOME=$HOME/.config
-
 # set vim as default editor
 export VISUAL=vim
 export EDITOR="$VISUAL"
@@ -184,13 +184,6 @@ fi
 # NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# fzf
-FZF_DIR="/usr/share/fzf"
-if [ -d "$FZF_DIR" ]; then
-    . "$FZF_DIR/key-bindings.bash"
-    . "$FZF_DIR/completion.bash"
-fi
 
 # zoxide
 if command -v zoxide &> /dev/null; then
@@ -245,6 +238,7 @@ BASH_COMPLETION_DIR="/usr/share/bash-completion/completions"
 if [ -d "$BASH_COMPLETION_DIR" ]; then
     [ -f "$BASH_COMPLETION_DIR/git" ] && . "$BASH_COMPLETION_DIR/git"
     [ -f "$BASH_COMPLETION_DIR/kubectl" ] && . "$BASH_COMPLETION_DIR/kubectl"
+    [ -f "$BASH_COMPLETION_DIR/docker" ] && . "$BASH_COMPLETION_DIR/docker"
 fi
 # user-generated completion scirpts
 USR_COMP_DIR="$XDG_CONFIG_HOME/bash-completion"
@@ -266,5 +260,21 @@ if [ -d "$SCRIPTS_DIR" ]; then
     for f in $SCRIPTS_DIR/*; do
         . $f
     done
+fi
+
+# fzf
+FZF_DIR="/usr/share/fzf"
+if [ -d "$FZF_DIR" ]; then
+    . "$FZF_DIR/key-bindings.bash"
+    . "$FZF_DIR/completion.bash"
+fi
+
+# blesh
+BLESH="/usr/share/blesh/ble.sh"
+if [[ -f $BLESH ]]; then
+    [[ $- == *i* ]] && source $BLESH
+    ble-bind -m vi_imap -f 'C-c' discard-line
+    ble-bind -m vi_nmap -f 'C-c' discard-line
+    bleopt complete_menu_complete=
 fi
 

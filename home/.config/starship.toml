@@ -2,14 +2,16 @@ format = """
 $username\
 $hostname\
 $directory\
-$git_branch\
-$git_status\
 $jobs\
 $character\
 """
+right_format = """
+$git_branch\
+$git_status\
+"""
+
 add_newline = false
 palette = "catppuccin_mocha"
-right_format = """$all"""
 command_timeout = 1000
 
 [character]
@@ -35,11 +37,11 @@ format = '[:$path]($style)'
 style = 'blue'
 
 [git_branch]
-format = '[\[$branch(:$remote_branch)]($style)'
+format = '[$branch(:$remote_branch)]($style)'
 style = 'mauve'
 
 [git_status]
-format = ':[$all_status\]]($style)'
+format = '[ $all_status]($style)'
 style = 'mauve'
 
 [jobs]
