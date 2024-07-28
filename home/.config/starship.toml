@@ -7,7 +7,6 @@ $git_status\
 $jobs\
 $character\
 """
-
 add_newline = false
 palette = "catppuccin_mocha"
 right_format = """$all"""
@@ -18,35 +17,35 @@ success_symbol = "[\\$](bold green)"
 error_symbol = "[\\$](bold red)"
 
 [username]
-style_user = "bold dimmed blue"
 show_always = true
-format = "[$user@]($style)"
+format = "[$user]($style)"
+style_user = "bold yellow"
 
 [hostname]
-ssh_only = false
-format = "[$hostname:]($style)"
+ssh_only = true
+format = "[@$hostname]($style)"
 trim_at = "-"
-style = "bold dimmed blue"
+style = "bold yellow"
 
 [directory]
 truncation_length = 0
 truncate_to_repo = false
 home_symbol = "~"
+format = '[:$path]($style)'
 style = 'blue'
-format = '[$path]($style)'
 
 [git_branch]
-style = 'mauve'
 format = '[\[$branch(:$remote_branch)]($style)'
+style = 'mauve'
 
 [git_status]
-style = 'mauve'
 format = ':[$all_status\]]($style)'
+style = 'mauve'
 
 [jobs]
 symbol = "+"
-style = "dimmed maroon"
 format = "[{$symbol$number}]($style)"
+style = "dimmed maroon"
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"

@@ -3,6 +3,7 @@ aspell
 autoconf-archive
 base
 base-devel
+bash-completion
 bat
 bc
 bind
@@ -31,6 +32,7 @@ hyperv
 imagemagick
 inetutils
 jdk21-openjdk
+jdk8-openjdk
 keychain
 libva-mesa-driver
 libva-utils
@@ -40,9 +42,11 @@ lolcat
 lsof
 man-db
 man-pages
+maven
 mesa-vdpau
 mpv
 nano
+neofetch
 neovim
 ntp
 nuspell
@@ -54,6 +58,7 @@ python-pip
 python-pynvim
 ripgrep
 socat
+starship
 stow
 tmon
 tmux
