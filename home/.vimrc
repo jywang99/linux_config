@@ -57,3 +57,6 @@ if v:version >= 700
     autocmd BufEnter * call AutoRestoreWinView()
 endif
 
+" color
+hi Normal guibg=NONE ctermbg=NONE
+

@@ -34,10 +34,12 @@ libva-utils
 libvoikko
 libxcrypt-compat
 lolcat
+luarocks
 man-db
 man-pages
 mesa-vdpau
 nano
+neovim
 ntp
 nuspell
 openssh
@@ -62,4 +64,5 @@ x86_energy_perf_policy
 xdg-utils
 xmlto
 yelp-tools
+zoxide
 zsh

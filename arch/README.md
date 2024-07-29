@@ -13,7 +13,7 @@ Save installed packages
 
 Restore from backup
 ```bash
-sudo pacman -S --needed - <profile>_pkglist-repo.txt
+sudo pacman -S --needed - < <profile>_pkglist-repo.txt
 for x in $(<profile>_pkglist-aur.txt); do yay -S $x; done
 ```
 

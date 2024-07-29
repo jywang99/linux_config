@@ -270,7 +270,6 @@ if [ -d "$FZF_DIR" ]; then
 fi
 
 # blesh
-# https://github.com/akinomyoga/ble.sh/blob/master/blerc.template
 BLESH="/usr/share/blesh/ble.sh"
 if [[ -f $BLESH ]]; then
     [[ $- == *i* ]] && source $BLESH
