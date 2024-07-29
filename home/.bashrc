@@ -103,7 +103,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-LS_COLORS=$LS_COLORS:'di=0;36:'
+LS_COLORS="$C:di=0;36:ow=38;5;250;48;5;025:tw=38;5;250;48;5;025:st=38;5;252;48;5;017"
 set -o vi
 
 # Starship
@@ -270,11 +270,12 @@ if [ -d "$FZF_DIR" ]; then
 fi
 
 # blesh
+# https://github.com/akinomyoga/ble.sh/blob/master/blerc.template
 BLESH="/usr/share/blesh/ble.sh"
 if [[ -f $BLESH ]]; then
     [[ $- == *i* ]] && source $BLESH
     ble-bind -m vi_imap -f 'C-c' discard-line
     ble-bind -m vi_nmap -f 'C-c' discard-line
-    bleopt complete_menu_complete=
+	ble-face auto_complete='fg=240,underline,italic'
 fi
 

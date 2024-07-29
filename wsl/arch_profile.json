@@ -1,0 +1,24 @@
+{
+	"adjustIndistinguishableColors": "never",
+	"backgroundImage": "C:\\wsl\\res\\background.png",
+	"bellStyle": "window",
+	"closeOnExit": "never",
+	"colorScheme": "One Half Dark",
+	"commandline": "C:\\Windows\\system32\\wsl.exe -d arch",
+	"cursorShape": "filledBox",
+	"font": 
+	{
+		"face": "UbuntuMono Nerd Font",
+		"size": 13.0
+	},
+	"guid": "{f8755476-bf79-4827-b27e-b8c5f4380783}",
+	"hidden": false,
+	"icon": "C:\\wsl\\res\\archlinux-64.jpg",
+	"name": "arch",
+	"padding": "5",
+	"scrollbarState": "hidden",
+	"startingDirectory": "~",
+	"suppressApplicationTitle": true,
+	"tabTitle": "arch btw"
+}
+
