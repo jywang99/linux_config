@@ -182,8 +182,13 @@ if [ -d "$PYENV_ROOT" ]; then
 fi
 
 # NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+NVM_SH="$HOME/.nvm/nvm.sh"
+if [[ -s $NVM_SH ]]; then
+    source $NVM_SH
+else
+    NVM_SH=/usr/share/nvm/init-nvm.sh
+    [ -s $NVM_SH ] && source $NVM_SH
+fi
 
 # zoxide
 if command -v zoxide &> /dev/null; then
