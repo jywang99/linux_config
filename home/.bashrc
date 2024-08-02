@@ -167,20 +167,6 @@ fi
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-# Go
-if command -v go &> /dev/null; then
-    goBinPath=$(go env GOPATH)/bin
-    export PATH=$PATH:$goBinPath
-fi
-
-# Python
-PYENV_ROOT="$HOME/.pyenv"
-if [ -d "$PYENV_ROOT" ]; then
-    export PYENV_ROOT
-    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-fi
-
 # NVM
 NVM_SH="$HOME/.nvm/nvm.sh"
 if [[ -s $NVM_SH ]]; then
@@ -219,25 +205,6 @@ alias tmux="tmux -u"
 alias pu='pushd'
 alias po='popd'
 
-function sshAndRenameTmux() {
-    if [ -z "$1" ]; then
-        echo "Usage: sshAndRenameTmux <hostname>"
-        return 1
-    fi
-
-    ORIG_AUTO_RENAME=$(tmux show-option -g automatic-rename)
-    ORIG_WINDOW_NAME=$(tmux display-message -p '#W')
-    tmux rename-window $1
-
-    cleanup() {
-        tmux rename-window "$ORIG_WINDOW_NAME"
-        tmux setw $ORIG_AUTO_RENAME
-    }
-    trap cleanup RETURN
-    ssh $1
-}
-alias ssh=sshAndRenameTmux
-
 # completion
 BASH_COMPLETION_DIR="/usr/share/bash-completion/completions"
 if [ -d "$BASH_COMPLETION_DIR" ]; then
@@ -259,14 +226,6 @@ complete -F __start_kubectl kc
 bind -x '"\ef": "cd && $(__fzf_cd__)"'
 bind 'set keyseq-timeout 0'
 
-# other user scripts
-SCRIPTS_DIR="$XDG_CONFIG_HOME/launch"
-if [ -d "$SCRIPTS_DIR" ]; then
-    for f in $SCRIPTS_DIR/*; do
-        . $f
-    done
-fi
-
 # fzf
 FZF_DIR="/usr/share/fzf"
 if [ -d "$FZF_DIR" ]; then
@@ -281,5 +240,13 @@ if [[ -f $BLESH ]]; then
     ble-bind -m vi_imap -f 'C-c' discard-line
     ble-bind -m vi_nmap -f 'C-c' discard-line
 	ble-face auto_complete='fg=240,underline,italic'
+fi
+
+# other user scripts
+SCRIPTS_DIR="$XDG_CONFIG_HOME/launch"
+if [ -d "$SCRIPTS_DIR" ]; then
+    for f in $SCRIPTS_DIR/*; do
+        . $f
+    done
 fi
 
