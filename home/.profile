@@ -12,3 +12,9 @@ if [ -d "$PYENV_ROOT" ]; then
     eval "$(pyenv init -)"
 fi
 
+# User scripts
+USER_BIN="$HOME/bin"
+if [ -d "$USER_BIN" ]; then
+    export PATH=$PATH:$USER_BIN
+fi
+
