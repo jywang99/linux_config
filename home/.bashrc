@@ -249,4 +249,6 @@ if [ -d "$SCRIPTS_DIR" ]; then
         . $f
     done
 fi
+# dirctory picker
+export FAV_DIRS=
 
