@@ -1,0 +1,9 @@
+blesh-git
+google-chrome
+nvm
+rate-mirrors
+wechat-uos-qt
+wine-wow64
+yay
+yay-debug
+zoom
