@@ -107,10 +107,10 @@ LS_COLORS="$C:di=0;36:ow=38;5;250;48;5;025:tw=38;5;250;48;5;025:st=38;5;252;48;5
 set -o vi
 
 # Starship
-# if command -v starship &> /dev/null; then
-#     eval "$(starship init bash)"
-# # simple custom prompt
-# else
+if command -v starship &> /dev/null; then
+    eval "$(starship init bash)"
+# simple custom prompt
+else
     PS1="\[\e[33m\]\u\[\e[m\]:\[\e[36m\]\w\[\e[m\]"
     PS1+="\[\e[90m\]{\`jobs | grep -E 'Running|Stopped' | wc -l\`}\[\e[m\]"
     PS1+="\\$ "
