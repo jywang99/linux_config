@@ -115,7 +115,7 @@ else
     PS1+="\[\e[90m\]{\`jobs | grep -E 'Running|Stopped' | wc -l\`}\[\e[m\]"
     PS1+="\\$ "
     export PS1
-# fi
+fi
 
 # set vim as default editor
 export VISUAL=vim
