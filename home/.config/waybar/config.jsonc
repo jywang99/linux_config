@@ -1,0 +1,88 @@
+// -*- mode: jsonc -*-
+[
+    {
+        "layer": "top",
+        "modules-left": ["custom/launcher", "cpu", "memory", "hyprland/submap", "tray"],
+        "modules-center": ["hyprland/workspaces", "hyprland/window"],
+        "modules-right": ["network", "custom/brightness", "pulseaudio", "clock", "battery"],
+
+        "pulseaudio": {
+            "tooltip": false,
+            "scroll-step": 5,
+            "format": "{icon} {volume}%",
+            "format-muted": "{icon} {volume}%",
+            "on-click": "pavucontrol",
+            "format-icons": {
+                "default": ["", "", ""]
+            }
+        },
+
+        "hyprland/workspaces": {
+            "format": "{icon}",
+            "on-scroll-up": "hyprctl dispatch workspace e+1",
+            "on-scroll-down": "hyprctl dispatch workspace e-1"
+        },
+        "network": {
+            "tooltip": false,
+            "format-wifi": "  {essid}",
+            "format-ethernet": ""
+        },
+        "backlight": {
+            "tooltip": false,
+            "format": " {}%",
+            "interval":1,
+            "on-scroll-up": "light -A 5",
+            "on-scroll-down": "light -U 5"
+        },
+        "battery": {
+            "states": {
+                "good": 95,
+                "warning": 30,
+                "critical": 20
+            },
+            "format": "{icon}  {capacity}%",
+            "format-charging": " {capacity}%",
+            "format-plugged": " {capacity}%",
+            "format-alt": "{time} {icon}",
+            "format-icons": ["", "", "", "", ""]
+        },
+        "tray":{
+            "icon-size":18,
+            "spacing": 10
+        },
+        "clock": {
+            // "timezone": "America/New_York",
+            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+            "format": "📅 {:%Y-%m-%d %H:%M}"
+        },
+        "cpu": {
+            "interval": 15,
+            "format": " {}%",
+            "max-length": 10
+        },
+        "memory": {
+            "interval": 30,
+            "format": " {}%",
+            "max-length": 10
+        },
+        "custom/launcher":{
+            "format": " ",
+            "on-click": "rofi -show drun",
+            "on-click-right": "killall rofi"
+        },
+        "custom/brightness": {
+            "exec": "ddcutil getvcp 10 | awk -F 'value =' '{print $2}' | awk '{print $1}' | sed 's/,//'",
+            "exec-if": "sleep 1", // Give enough time for `sway output` command changes to propagate so we can read them in the next `exec`
+            "format": "{icon} {}%",
+            "format-icons": [""],
+            "interval": "once",
+            "on-scroll-up": "ddcutil setvcp 10 + 5",
+            "on-scroll-down": "ddcutil setvcp 10 - 5"
+        },
+        "hyprland/submap": {
+            "format": "🖮 {}",
+            "max-length": 30,
+            "tooltip": false
+        }
+    }
+]
