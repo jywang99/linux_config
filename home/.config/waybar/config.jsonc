@@ -1,8 +1,9 @@
 // -*- mode: jsonc -*-
 [
     {
+        "height": 35,
         "layer": "top",
-        "modules-left": ["custom/launcher", "cpu", "memory", "hyprland/submap", "tray"],
+        "modules-left": ["custom/launcher", "wlr/taskbar", "hyprland/submap"],
         "modules-center": ["hyprland/workspaces", "hyprland/window"],
         "modules-right": ["network", "custom/brightness", "pulseaudio", "clock", "battery"],
 
@@ -46,10 +47,6 @@
             "format-alt": "{time} {icon}",
             "format-icons": ["", "", "", "", ""]
         },
-        "tray":{
-            "icon-size":18,
-            "spacing": 10
-        },
         "clock": {
             // "timezone": "America/New_York",
             "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
@@ -83,6 +80,17 @@
             "format": "🖮 {}",
             "max-length": 30,
             "tooltip": false
+        },
+        "wlr/taskbar": {
+            "format": "{icon}",
+            "icon-size": 18,
+            "tooltip-format": "{title}",
+            "on-click": "activate",
+            "on-click-middle": "close",
+            // "ignore-list": ["Alacritty", "kitty"],
+            "rewrite": {
+                // "Firefox Web Browser": "Firefox"
+            }
         }
     }
 ]
