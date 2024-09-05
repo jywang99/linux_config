@@ -5,35 +5,71 @@
         "layer": "top",
         "modules-left": ["custom/launcher", "wlr/taskbar", "hyprland/submap"],
         "modules-center": ["hyprland/workspaces", "hyprland/window"],
-        "modules-right": ["network", "custom/brightness", "pulseaudio", "clock", "battery"],
+        "modules-right": ["network", "bluetooth", "custom/brightness", "pulseaudio", "clock", "battery"],
 
-        "pulseaudio": {
-            "tooltip": false,
-            "scroll-step": 5,
-            "format": "{icon} {volume}%",
-            "format-muted": "{icon} {volume}%",
-            "on-click": "pavucontrol",
-            "format-icons": {
-                "default": ["", "", ""]
-            }
+        // left modules
+        "custom/launcher":{
+            "format": " ",
+            "on-click": "rofi -show drun",
+            "on-click-right": "killall rofi"
+        },
+        "hyprland/submap": {
+            "format": "🖮 {}",
+            "max-length": 30,
+            "tooltip": false
+        },
+        "wlr/taskbar": {
+            "format": "{icon}",
+            "icon-size": 18,
+            "tooltip-format": "{title}",
+            "on-click": "activate",
+            "on-click-middle": "close"
         },
 
+        // center modules
         "hyprland/workspaces": {
             "format": "{icon}",
             "on-scroll-up": "hyprctl dispatch workspace e+1",
             "on-scroll-down": "hyprctl dispatch workspace e-1"
         },
+
+        // right modules
+        "pulseaudio": {
+            "format": "{icon} {volume}%",
+            "format-bluetooth": "{icon} {volume}%",
+            "format-muted": "",
+            "format-icons": {
+                "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
+                "alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "",
+                "headphone": "",
+                "hands-free": "",
+                "headset": "",
+                "phone": "",
+                "phone-muted": "",
+                "portable": "",
+                "car": "",
+                "default": ["", "", ""]
+            },
+            "scroll-step": 1,
+            "on-click": "pavucontrol",
+            "ignored-sinks": ["Easy Effects Sink"]
+        },
         "network": {
+            "format": "{ifname}",
+            "format-wifi": "  {essid} ({signalStrength}%)",
+            "format-ethernet": "󰊗 {ipaddr}/{cidr}",
+            "format-disconnected": "(disconnected)",
+            "tooltip-format": "󰊗 {ifname} via {gwaddr}",
+            "tooltip-format-wifi": " {essid} ({signalStrength}%)",
+            "tooltip-format-ethernet": " {ifname}",
+            "tooltip-format-disconnected": "Disconnected",
+            "tooltip": false,
+            "max-length": 50
+        },
+        "network_old": {
             "tooltip": false,
             "format-wifi": "  {essid}",
             "format-ethernet": ""
-        },
-        "backlight": {
-            "tooltip": false,
-            "format": " {}%",
-            "interval":1,
-            "on-scroll-up": "light -A 5",
-            "on-scroll-down": "light -U 5"
         },
         "battery": {
             "states": {
@@ -52,21 +88,6 @@
             "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
             "format": "📅 {:%Y-%m-%d %H:%M}"
         },
-        "cpu": {
-            "interval": 15,
-            "format": " {}%",
-            "max-length": 10
-        },
-        "memory": {
-            "interval": 30,
-            "format": " {}%",
-            "max-length": 10
-        },
-        "custom/launcher":{
-            "format": " ",
-            "on-click": "rofi -show drun",
-            "on-click-right": "killall rofi"
-        },
         "custom/brightness": {
             "exec": "ddcutil getvcp 10 | awk -F 'value =' '{print $2}' | awk '{print $1}' | sed 's/,//'",
             "exec-if": "sleep 1", // Give enough time for `sway output` command changes to propagate so we can read them in the next `exec`
@@ -76,21 +97,15 @@
             "on-scroll-up": "ddcutil setvcp 10 + 5",
             "on-scroll-down": "ddcutil setvcp 10 - 5"
         },
-        "hyprland/submap": {
-            "format": "🖮 {}",
-            "max-length": 30,
-            "tooltip": false
-        },
-        "wlr/taskbar": {
-            "format": "{icon}",
-            "icon-size": 18,
-            "tooltip-format": "{title}",
-            "on-click": "activate",
-            "on-click-middle": "close",
-            // "ignore-list": ["Alacritty", "kitty"],
-            "rewrite": {
-                // "Firefox Web Browser": "Firefox"
-            }
+        "bluetooth": {
+            "format": " {status}",
+            "format-disabled": " (OFF)",
+            "format-connected": " {device_alias}",
+            "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+            "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+            "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+            "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+            "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
         }
     }
 ]

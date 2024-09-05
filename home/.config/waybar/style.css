@@ -140,7 +140,7 @@ window#waybar.empty #window {
     }
 }
 
-#backlight {
+#bluetooth, #taskbar, #submap, #custom-brightness, #backlight, #clock, #tray, #custom-power, #custom-media {
 	margin-top: 6px;
 	margin-left: 8px;
 	padding-left: 10px;
@@ -148,55 +148,7 @@ window#waybar.empty #window {
 	margin-bottom: 0px;
 	border-radius: 10px;
 	transition: none;
-	color:@textcolor2;
-	background: @backgroundlight;
-}
-#clock {
-	margin-top: 6px;
-	margin-left: 8px;
-	margin-right: 8px;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 0px;
-	border-radius: 10px;
-	transition: none;
-	color:@textcolor2;
-	background: @backgroundlight;
-	/*background: #1A1826;*/
-}
-
-#memory {
-	margin-top: 6px;
-	margin-left: 8px;
-	padding-left: 10px;
-	margin-bottom: 0px;
-	padding-right: 10px;
-	border-radius: 10px;
-	transition: none;
-	color:@textcolor2;
-	background: @backgroundlight;
-}
-#cpu {
-	margin-top: 6px;
-	margin-left: 8px;
-	padding-left: 10px;
-	margin-bottom: 0px;
-	padding-right: 10px;
-	border-radius: 10px;
-	transition: none;
-	color:@textcolor2;
-	background: @backgroundlight;
-}
-
-#tray {
-	margin-top: 6px;
-	margin-left: 8px;
-	padding-left: 10px;
-	margin-bottom: 0px;
-	padding-right: 10px;
-	border-radius: 10px;
-	transition: none;
-	color:@textcolor2;
+	color: @textcolor2;
 	background: @backgroundlight;
 }
 
@@ -210,56 +162,6 @@ window#waybar.empty #window {
 	transition: none;
     color:@textcolor2;
     background: #161320;
-}
-
-#custom-power {
-	font-size: 20px;
-	margin-top: 6px;
-	margin-left: 8px;
-	margin-right: 8px;
-	padding-left: 10px;
-	padding-right: 5px;
-	margin-bottom: 0px;
-	border-radius: 10px;
-	transition: none;
-	color:@textcolor2;
-	background: @backgroundlight;
-}
-
-#custom-wallpaper {
-	margin-top: 6px;
-	margin-left: 8px;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 0px;
-	border-radius: 10px;
-	transition: none;
-	color:@textcolor2;
-	background: @backgroundlight;
-}
-
-#custom-updates {
-	margin-top: 6px;
-	margin-left: 8px;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 0px;
-	border-radius: 10px;
-	transition: none;
-	color:@textcolor2;
-	background: @backgroundlight;
-}
-
-#custom-media {
-	margin-top: 6px;
-	margin-left: 8px;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 0px;
-	border-radius: 10px;
-	transition: none;
-	color:@textcolor2;
-	background: @backgroundlight;
 }
 
 #workspaces {
@@ -302,39 +204,3 @@ window#waybar.empty #window {
     opacity:0.7;
 }
 
-#custom-brightness {
-	margin-top: 6px;
-	margin-left: 8px;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 0px;
-	border-radius: 10px;
-	transition: none;
-	color: @textcolor2;
-	background: @backgroundlight;
-}
-
-#submap {
-    margin-top: 6px;
-    margin-left: 8px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 0px;
-    border-radius: 10px;
-    transition: none;
-    color: @textcolor2;
-    background: @backgroundlight;
-}
-
-
-#taskbar {
-	margin-top: 6px;
-	margin-left: 8px;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-bottom: 0px;
-	border-radius: 10px;
-	transition: none;
-	color: @textcolor2;
-	background: @backgroundlight;
-}
