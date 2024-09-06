@@ -1,5 +1,6 @@
 # Linux Configs
-My Linux configuration files and scripts.
+My Linux configuration files and scripts.\
+Some configs are in submodules.
 
 ## Dotfiles
 My dotfiles are stored under `home` directory of this repository.\
