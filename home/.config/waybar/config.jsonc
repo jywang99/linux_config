@@ -2,8 +2,9 @@
 [
     {
         "height": 35,
+        "margin-right": 8,
         "layer": "top",
-        "modules-left": ["custom/launcher", "wlr/taskbar", "hyprland/submap"],
+        "modules-left": ["custom/launcher", "wlr/taskbar", "custom/language", "hyprland/submap"],
         "modules-center": ["hyprland/workspaces", "hyprland/window"],
         "modules-right": ["network", "bluetooth", "custom/brightness", "pulseaudio", "clock", "battery"],
 
@@ -24,6 +25,12 @@
             "tooltip-format": "{title}",
             "on-click": "activate",
             "on-click-middle": "close"
+        },
+        "custom/language": {
+            "exec": "fcitx5-remote -n",
+            "format": "{icon} {}",
+            "format-icons": ["🖮"],
+            "interval": 1
         },
 
         // center modules
@@ -86,7 +93,7 @@
         "clock": {
             // "timezone": "America/New_York",
             "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-            "format": "📅 {:%Y-%m-%d %H:%M}"
+            "format": "⏲ {:%Y-%m-%d %H:%M}"
         },
         "custom/brightness": {
             "exec": "ddcutil getvcp 10 | awk -F 'value =' '{print $2}' | awk '{print $1}' | sed 's/,//'",
