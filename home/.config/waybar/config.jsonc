@@ -4,7 +4,7 @@
         "height": 35,
         "margin-right": 8,
         "layer": "top",
-        "modules-left": ["custom/launcher", "wlr/taskbar", "custom/language", "hyprland/submap"],
+        "modules-left": ["custom/launcher", "wlr/taskbar", "custom/language", "custom/player", "hyprland/submap"],
         "modules-center": ["hyprland/workspaces", "hyprland/window"],
         "modules-right": ["network", "bluetooth", "custom/brightness", "pulseaudio", "clock", "battery"],
 
@@ -13,11 +13,6 @@
             "format": " ",
             "on-click": "rofi -show drun",
             "on-click-right": "killall rofi"
-        },
-        "hyprland/submap": {
-            "format": "🖮 {}",
-            "max-length": 30,
-            "tooltip": false
         },
         "wlr/taskbar": {
             "format": "{icon}",
@@ -31,6 +26,17 @@
             "format": "{icon} {}",
             "format-icons": ["🖮"],
             "interval": 1
+        },
+        "custom/player": {
+            "exec": "meta=$(playerctl metadata | grep title) && echo $meta | awk '{print $3}'",
+            "interval": 1,
+            "format": "⫸{}",
+            "max-length": 30
+        },
+        "hyprland/submap": {
+            "format": "🖮 {}",
+            "max-length": 30,
+            "tooltip": false
         },
 
         // center modules
@@ -100,7 +106,7 @@
             "exec-if": "sleep 1", // Give enough time for `sway output` command changes to propagate so we can read them in the next `exec`
             "format": "{icon} {}%",
             "format-icons": [""],
-            "interval": "once",
+            "interval": 3,
             "on-scroll-up": "ddcutil setvcp 10 + 5",
             "on-scroll-down": "ddcutil setvcp 10 - 5"
         },

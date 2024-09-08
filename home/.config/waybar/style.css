@@ -140,7 +140,7 @@ window#waybar.empty #window {
     }
 }
 
-#bluetooth, #taskbar, #submap, #custom-brightness, #backlight, #clock, #tray, #custom-power, #custom-media, #custom-language {
+#bluetooth, #taskbar, #submap, #custom-brightness, #backlight, #clock, #tray, #custom-power, #custom-media, #custom-language, #custom-player {
 	margin-top: 6px;
 	margin-left: 8px;
 	padding-left: 10px;
