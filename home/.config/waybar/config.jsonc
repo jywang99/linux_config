@@ -28,10 +28,13 @@
             "interval": 1
         },
         "custom/player": {
-            "exec": "meta=$(playerctl metadata | grep title) && echo $meta | awk '{print $3}'",
+            "exec": "meta=$(playerctl metadata 2> /dev/null | grep title) && echo $meta | cut -d' ' -f3-",
             "interval": 1,
-            "format": "⫸{}",
-            "max-length": 30
+            "format": "⫸ {}",
+            "max-length": 30,
+            "on-click": "playerctl play-pause",
+            "on-scroll-up": "playerctl next",
+            "on-scroll-down": "playerctl previous"
         },
         "hyprland/submap": {
             "format": "🖮 {}",
@@ -97,16 +100,28 @@
             "format-icons": ["", "", "", "", ""]
         },
         "clock": {
-            // "timezone": "America/New_York",
-            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-            "format": "⏲ {:%Y-%m-%d %H:%M}"
+            "format": "⏲ {:%Y-%m-%d %H:%M}",
+            "tooltip-format": "<tt><small>{calendar}</small></tt>",
+            "calendar": {
+                "mode"          : "year",
+                "mode-mon-col"  : 3,
+                "weeks-pos"     : "right",
+                "on-scroll"     : 1,
+                "format": {
+                    "months":     "<span color='#ffead3'><b>{}</b></span>",
+                    "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                    "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                    "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                    "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                }
+            }
         },
         "custom/brightness": {
             "exec": "ddcutil getvcp 10 | awk -F 'value =' '{print $2}' | awk '{print $1}' | sed 's/,//'",
             "exec-if": "sleep 1", // Give enough time for `sway output` command changes to propagate so we can read them in the next `exec`
             "format": "{icon} {}%",
             "format-icons": [""],
-            "interval": 3,
+            "interval": 1,
             "on-scroll-up": "ddcutil setvcp 10 + 5",
             "on-scroll-down": "ddcutil setvcp 10 - 5"
         },
