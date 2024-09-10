@@ -4,7 +4,7 @@
         "height": 35,
         "margin-right": 8,
         "layer": "top",
-        "modules-left": ["custom/launcher", "wlr/taskbar", "custom/language", "custom/player", "hyprland/submap"],
+        "modules-left": ["custom/launcher", "wlr/taskbar", "custom/fcitx", "custom/player", "hyprland/submap"],
         "modules-center": ["hyprland/workspaces", "hyprland/window"],
         "modules-right": ["network", "bluetooth", "custom/brightness", "pulseaudio", "clock", "battery"],
 
@@ -21,15 +21,13 @@
             "on-click": "activate",
             "on-click-middle": "close"
         },
-        "custom/language": {
-            "exec": "fcitx5-remote -n",
+        "custom/fcitx": {
+            "exec": "$HOME/.config/hypr/bin/monitorFcitx.sh",
             "format": "{icon} {}",
-            "format-icons": ["🖮"],
-            "interval": 1
+            "format-icons": ["🖮"]
         },
         "custom/player": {
-            "exec": "meta=$(playerctl metadata 2> /dev/null | grep title) && echo $meta | cut -d' ' -f3-",
-            "interval": 1,
+            "exec": "$HOME/.config/waybar/bin/getPlayer.sh",
             "format": "⫸ {}",
             "max-length": 30,
             "on-click": "playerctl play-pause",
@@ -79,7 +77,6 @@
             "tooltip-format-wifi": " {essid} ({signalStrength}%)",
             "tooltip-format-ethernet": " {ifname}",
             "tooltip-format-disconnected": "Disconnected",
-            "tooltip": false,
             "max-length": 50
         },
         "network_old": {
@@ -117,13 +114,11 @@
             }
         },
         "custom/brightness": {
-            "exec": "ddcutil getvcp 10 | awk -F 'value =' '{print $2}' | awk '{print $1}' | sed 's/,//'",
-            "exec-if": "sleep 1", // Give enough time for `sway output` command changes to propagate so we can read them in the next `exec`
+            "exec": "$HOME/.config/waybar/bin/getBrightness.sh",
             "format": "{icon} {}%",
             "format-icons": [""],
-            "interval": 1,
-            "on-scroll-up": "ddcutil setvcp 10 + 5",
-            "on-scroll-down": "ddcutil setvcp 10 - 5"
+            "on-scroll-up": "$HOME/.config/hypr/bin/setBrightness.sh + 5",
+            "on-scroll-down": "$HOME/.config/hypr/bin/setBrightness.sh - 5"
         },
         "bluetooth": {
             "format": " {status}",
