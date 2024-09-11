@@ -85,6 +85,9 @@ elif [ "$CHENTRY" = "toggle off" ]; then
 	nmcli radio wifi off
 
 else
+    if [[ -z $CHSSID ]]; then
+        exit
+    fi
 
 	# If the connection is already in use, then this will still be able to get the SSID
 	if [ "$CHSSID" = "*" ]; then
