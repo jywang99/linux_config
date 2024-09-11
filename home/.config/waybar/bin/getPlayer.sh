@@ -15,6 +15,8 @@ reset_all() {
     album=""
     artist=""
     title=""
+    print_label
+    # print_tooltip
 }
 reset_all
 

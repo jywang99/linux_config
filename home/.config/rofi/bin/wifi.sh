@@ -3,6 +3,8 @@
 # Starts a scan of available broadcasting SSIDs
 # nmcli dev wifi rescan
 
+ROFI=$HOME/.config/rofi/bin/launcher
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 FIELDS=SSID,SECURITY
@@ -19,7 +21,8 @@ else
 	echo "WARNING: config file not found! Using default values."
 fi
 
-notify-send "Opening wifi..." -t 3000 -u low &
+# show loading message
+$ROFI -e "Scanning for wifi..." &
 
 LIST=$(nmcli --fields "$FIELDS" device wifi list | sed '/^--/d')
 # For some reason rofi always approximates character width 2 short... hmmm
@@ -53,8 +56,10 @@ elif [[ "$CONSTATE" =~ "disabled" ]]; then
 fi
 
 
+# kill loading message
+pkill rofi
 
-CHENTRY=$(echo -e "$TOGGLE\nmanual\n$LIST" | uniq -u | rofi -dmenu -p "Wi-Fi SSID: " -lines "$LINENUM" -a "$HIGHLINE" -location "$POSITION" -yoffset "$YOFF" -xoffset "$XOFF" -font "$FONT" -width -"$RWIDTH")
+CHENTRY=$(echo -e "$TOGGLE\nmanual\n$LIST" | uniq -u | $ROFI -dmenu -p "Wi-Fi SSID: ")
 #echo "$CHENTRY"
 CHSSID=$(echo "$CHENTRY" | sed  's/\s\{2,\}/\|/g' | awk -F "|" '{print $1}')
 #echo "$CHSSID"
@@ -62,12 +67,9 @@ CHSSID=$(echo "$CHENTRY" | sed  's/\s\{2,\}/\|/g' | awk -F "|" '{print $1}')
 # If the user inputs "manual" as their SSID in the start window, it will bring them to this screen
 if [ "$CHENTRY" = "manual" ] ; then
 	# Manual entry of the SSID and password (if appplicable)
-	MSSID=$(echo "enter the SSID of the network (SSID,password)" | rofi -dmenu -p "Manual Entry: " -font "$FONT" -lines 1)
+	MSSID=$(echo "enter the SSID of the network (SSID,password)" | $ROFI -dmenu -p "Manual Entry: " -lines 1)
 	# Separating the password from the entered string
 	MPASS=$(echo "$MSSID" | awk -F "," '{print $2}')
-
-	#echo "$MSSID"
-	#echo "$MPASS"
 
 	# If the user entered a manual password, then use the password nmcli command
 	if [ "$MPASS" = "" ]; then
@@ -94,9 +96,12 @@ else
 		nmcli con up "$CHSSID"
 	else
 		if [[ "$CHENTRY" =~ "WPA2" ]] || [[ "$CHENTRY" =~ "WEP" ]]; then
-			WIFIPASS=$(echo "if connection is stored, hit enter" | rofi -dmenu -p "password: " -lines 1 -font "$FONT" )
+			WIFIPASS=$(echo "if connection is stored, hit enter" | $ROFI -dmenu -p "password: " -lines 1)
 		fi
-		nmcli dev wifi con "$CHSSID" password "$WIFIPASS"
+        err=$(nmcli dev wifi con "$CHSSID" password "$WIFIPASS" 2>&1)
+        if [[ $? -ne 0 ]]; then
+            notify-send "Error connecting to $CHSSID" "$err" -t 5000 -u critical
+        fi
 	fi
 
 fi
