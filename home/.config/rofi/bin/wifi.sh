@@ -3,7 +3,7 @@
 # Starts a scan of available broadcasting SSIDs
 # nmcli dev wifi rescan
 
-ROFI=$HOME/.config/rofi/bin/launcher
+ROFI=$HOME/.config/rofi/bin/dmenu
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 

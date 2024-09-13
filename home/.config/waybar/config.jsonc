@@ -10,7 +10,7 @@
 
         // left modules
         "custom/launcher":{
-            "format": " ",
+            "format": "<span color='#158CCB'></span> ",
             "on-click": "rofi -show drun",
             "on-click-right": "killall rofi"
         },
@@ -23,19 +23,19 @@
         },
         "custom/fcitx": {
             "exec": "$HOME/.config/hypr/bin/monitorFcitx.sh",
-            "format": "{icon} {}",
+            "format": "<span color='#dc8a78'>{icon}</span> {}",
             "format-icons": ["🖮"]
         },
         "custom/player": {
             "exec": "$HOME/.config/waybar/bin/getPlayer.sh",
-            "format": "⫸ {}",
+            "format": "<span color='#209fb5'>⫸</span> {}",
             "max-length": 30,
             "on-click": "playerctl play-pause",
             "on-scroll-up": "playerctl next",
             "on-scroll-down": "playerctl previous"
         },
         "hyprland/submap": {
-            "format": "🖮 {}",
+            "format": "<span color='#e64553'>⌘</span> {}",
             "max-length": 30,
             "tooltip": false
         },
@@ -46,11 +46,16 @@
             "on-scroll-up": "hyprctl dispatch workspace e+1",
             "on-scroll-down": "hyprctl dispatch workspace e-1"
         },
+        "hyprland/window": {
+            "format": "<span color='#94e2d5'>▰</span> {}",
+            "max-length": 50,
+            "separate-outputs": true
+        },
 
         // right modules
         "pulseaudio": {
-            "format": "{icon} {volume}%",
-            "format-bluetooth": "{icon} {volume}%",
+            "format": "<span color='#fe640b'>{icon}</span> {volume}%",
+            "format-bluetooth": "<span color='#fe640b'>{icon}</span> {volume}%",
             "format-muted": "",
             "format-icons": {
                 "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
@@ -70,19 +75,14 @@
         },
         "network": {
             "format": "{ifname}",
-            "format-wifi": "  {essid} ({signalStrength}%)",
-            "format-ethernet": "󰊗 {ipaddr}/{cidr}",
+            "format-wifi": "<span color='#dd7878'></span>  {essid} ({signalStrength}%)",
+            "format-ethernet": "<span color='#dd7878'>󰊗</span> {ipaddr}/{cidr}",
             "format-disconnected": "(disconnected)",
-            "tooltip-format": "󰊗 {ifname} via {gwaddr}",
-            "tooltip-format-wifi": " {essid} ({signalStrength}%)",
-            "tooltip-format-ethernet": " {ifname}",
+            "tooltip-format": "<span color='#dd7878'>󰊗</span> {ifname} via {gwaddr}",
+            "tooltip-format-wifi": "<span color='#dd7878'></span> {essid} ({signalStrength}%)",
+            "tooltip-format-ethernet": "<span color='#dd7878'></span> {ifname}",
             "tooltip-format-disconnected": "Disconnected",
             "max-length": 50
-        },
-        "network_old": {
-            "tooltip": false,
-            "format-wifi": "  {essid}",
-            "format-ethernet": ""
         },
         "battery": {
             "states": {
@@ -90,14 +90,14 @@
                 "warning": 30,
                 "critical": 20
             },
-            "format": "{icon}  {capacity}%",
-            "format-charging": " {capacity}%",
-            "format-plugged": " {capacity}%",
-            "format-alt": "{time} {icon}",
+            "format": "<span color='#179299'>{icon}</span>  {capacity}%",
+            "format-charging": "<span color='#179299'></span> {capacity}%",
+            "format-plugged": "<span color='#179299'></span> {capacity}%",
+            "format-alt": "<span color='#179299'>{icon}</span> {time}",
             "format-icons": ["", "", "", "", ""]
         },
         "clock": {
-            "format": "⏲ {:%Y-%m-%d %H:%M}",
+            "format": "<span color='#91d7e3'>⏲</span> {:%Y-%m-%d %H:%M}",
             "tooltip-format": "<tt><small>{calendar}</small></tt>",
             "calendar": {
                 "mode"          : "year",
@@ -115,16 +115,16 @@
         },
         "custom/brightness": {
             "exec": "bright=$HOME/.config/hypr/events/brightness && tail -1 $bright && tail -f $bright",
-            "format": "{icon} {}%",
+            "format": "<span color='#df8e1d'>{icon}</span> {}%",
             "format-icons": [""],
             "on-scroll-up": "$HOME/.config/hypr/bin/setBrightness.sh + 5",
             "on-scroll-down": "$HOME/.config/hypr/bin/setBrightness.sh - 5"
         },
         "bluetooth": {
-            "format": " {status}",
-            "format-disabled": " (OFF)",
-            "format-connected": " {device_alias}",
-            "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+            "format": "<span color='#7287fd'></span> {status}",
+            "format-disabled": "<span color='#7287fd'></span> (OFF)",
+            "format-connected": "<span color='#7287fd'></span> {device_alias}",
+            "format-connected-battery": "<span color='#7287fd'></span> {device_alias} {device_battery_percentage}%",
             "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
             "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
             "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",

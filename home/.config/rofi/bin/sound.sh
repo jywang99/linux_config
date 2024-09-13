@@ -15,7 +15,7 @@ current=$(pactl list short sinks | grep "`pactl get-default-sink`" | cut -f1)
 chosen=$(pactl list sinks | grep -E '^Sink|device.description' | \
 		paste -d " " - - | sed 's/Sink \#//' | sed 's/device.description = //' | \
 		sed 's/"//g' | sed "s/$current/* $current/" | sed 's/^\([0-9]\+\)/   \1/' |\
-		$HOME/.config/rofi/bin/launcher -dmenu -p "select audio output" -i -l 10)
+		$HOME/.config/rofi/bin/dmenu -dmenu -p "select audio output" -i -l 10)
 
 # nothing selected
 [ "$chosen" != "" ] || exit
