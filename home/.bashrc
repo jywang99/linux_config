@@ -158,6 +158,7 @@ fi
 alias tmux="tmux -u"
 alias pu='pushd'
 alias po='popd'
+alias ta='tmux attach-session || tmux new-session'
 
 # completion
 BASH_COMPLETION_DIR="/usr/share/bash-completion/completions"

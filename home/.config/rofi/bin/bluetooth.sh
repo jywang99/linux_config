@@ -20,6 +20,10 @@
 divider="---------"
 goback="Back"
 
+loading() {
+    $HOME/.config/rofi/variants/loading/loading.sh -e "Scanning for wifi..." &
+}
+
 # Checks if bluetooth controller is powered on
 power_on() {
     if bluetoothctl show | grep -q "Powered: yes"; then
@@ -61,9 +65,11 @@ toggle_scan() {
         bluetoothctl scan off
         show_menu
     else
-        bluetoothctl scan on &
+        bluetoothctl --timeout 5 scan on &
         echo "Scanning..."
+        loading
         sleep 5
+        pkill rofi
         show_menu
     fi
 }
@@ -305,7 +311,7 @@ show_menu() {
 }
 
 # Rofi command to pipe into, can add any options here
-rofi_command="rofi -dmenu $* -p"
+rofi_command="$HOME/.config/rofi/bin/dmenu -dmenu $* -p"
 
 case "$1" in
     --status)

@@ -23,16 +23,17 @@
         },
         "custom/fcitx": {
             "exec": "$HOME/.config/hypr/bin/monitorFcitx.sh",
-            "format": "<span color='#dc8a78'>{icon}</span> {}",
-            "format-icons": ["🖮"]
+            "format": "<span color='#dc8a78'>🖮</span> {}"
         },
         "custom/player": {
-            "exec": "$HOME/.config/waybar/bin/getPlayer.sh",
+            "exec": "$HOME/.config/hypr/bin/getPlayer.sh",
+            "return-type": "json",
             "format": "<span color='#209fb5'>⫸</span> {}",
             "max-length": 30,
             "on-click": "playerctl play-pause",
             "on-scroll-up": "playerctl next",
-            "on-scroll-down": "playerctl previous"
+            "on-scroll-down": "playerctl previous",
+            "tooltip": true
         },
         "hyprland/submap": {
             "format": "<span color='#e64553'>⌘</span> {}",
@@ -47,7 +48,7 @@
             "on-scroll-down": "hyprctl dispatch workspace e-1"
         },
         "hyprland/window": {
-            "format": "<span color='#94e2d5'>▰</span> {}",
+            "format": "<span color='#94e2d5'>🗗</span> {}",
             "max-length": 50,
             "separate-outputs": true
         },
@@ -56,7 +57,7 @@
         "pulseaudio": {
             "format": "<span color='#fe640b'>{icon}</span> {volume}%",
             "format-bluetooth": "<span color='#fe640b'>{icon}</span> {volume}%",
-            "format-muted": "",
+            "format-muted": "<span color='#fe640b'></span>",
             "format-icons": {
                 "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
                 "alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "",
@@ -115,8 +116,7 @@
         },
         "custom/brightness": {
             "exec": "bright=$HOME/.config/hypr/events/brightness && tail -1 $bright && tail -f $bright",
-            "format": "<span color='#df8e1d'>{icon}</span> {}%",
-            "format-icons": [""],
+            "format": "<span color='#df8e1d'></span> {}%",
             "on-scroll-up": "$HOME/.config/hypr/bin/setBrightness.sh + 5",
             "on-scroll-down": "$HOME/.config/hypr/bin/setBrightness.sh - 5"
         },

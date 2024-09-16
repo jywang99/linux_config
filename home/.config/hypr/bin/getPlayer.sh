@@ -8,6 +8,19 @@
 # chromium xesam:artist
 # chromium xesam:title
 
+print_label() {
+    echo "$title"
+}
+
+render() {
+    if [[ -z "$title" ]]; then
+        echo ""
+        return
+    fi
+    # echo "{\"text\": \"$title\", \"tooltip\": \"<img src=\"$artUrl\"/>$title\n$artist\n$album\"}"
+    echo "{\"text\": \"$title\", \"tooltip\": \"Title: $title\nArtist: $artist\nAlbum: $album\"}"
+}
+
 reset_all() {
     artUrl=""
     length=""
@@ -15,19 +28,9 @@ reset_all() {
     album=""
     artist=""
     title=""
-    print_label
-    # print_tooltip
+    render
 }
 reset_all
-
-print_label() {
-    echo "$title"
-}
-
-print_tooltip() {
-    # One day I'll get this to show
-    echo "<img src=\"$artUrl\"/><br/>$title<br/>$artist<br/>$album"
-}
 
 playerctl -F metadata 2>/dev/null | while read -r line; do
     # blank line: reset all variables
@@ -40,8 +43,6 @@ playerctl -F metadata 2>/dev/null | while read -r line; do
     field=$(echo "$line" | awk '{print $2}' | awk -F ':' '{print $2}')
     # $3 til end
     value=$(echo "$line" | awk '{for(i=3;i<=NF;++i) printf "%s ", $i}')
-
-    label_updated=0
 
     case $field in
         "artUrl")
@@ -61,16 +62,12 @@ playerctl -F metadata 2>/dev/null | while read -r line; do
             ;;
         "title")
             title="$value"
-            label_updated=1
             ;;
         *)
             continue
             ;;
     esac
 
-    if [[ $label_updated -eq 1 ]]; then
-        print_label
-    fi
-    # print_tooltip
+    render
 done
 
