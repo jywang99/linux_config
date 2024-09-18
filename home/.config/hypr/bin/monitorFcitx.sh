@@ -6,15 +6,22 @@
 
 hit=0
 
-# current input method
-echo $(fcitx5-remote -n)
+echo_label() {
+    case $1 in
+        "keyboard-us") echo "EN";;
+        "mozc") echo "JP";;
+        "pinyin") echo "CN";;
+    esac
+}
+
+echo_label $(fcitx5-remote -n)
 
 # continuously monitor dbus messages
 dbus-monitor "type='method_call',destination='org.fcitx.Fcitx5',member='SetCurrentIM'" 2>/dev/null | while read -r line; do
     if [[ $hit -eq 1 ]]; then
         # get input method
         currentIM=$(echo "$line" | grep -oP "string \"\K[^\"]+")
-        echo "$currentIM"
+        echo_label "$currentIM"
         hit=0
         continue
     fi
