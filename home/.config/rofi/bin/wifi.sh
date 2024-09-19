@@ -4,6 +4,7 @@
 # nmcli dev wifi rescan
 
 ROFI=$HOME/.config/rofi/bin/dmenu
+LOAD=$HOME/.config/rofi/bin/loading
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -22,7 +23,7 @@ else
 fi
 
 # show loading message
-$ROFI -e "Scanning for wifi..." &
+$LOAD -e "Scanning for wifi..." &
 
 LIST=$(nmcli --fields "$FIELDS" device wifi list | sed '/^--/d')
 # For some reason rofi always approximates character width 2 short... hmmm

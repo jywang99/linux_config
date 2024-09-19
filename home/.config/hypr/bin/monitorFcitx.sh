@@ -25,7 +25,7 @@ dbus-monitor "type='method_call',destination='org.fcitx.Fcitx5',member='SetCurre
         hit=0
         continue
     fi
-    
+
     # if current line is method call to SetCurrentIM, next line contains input method
     if echo "$line" | grep -q "SetCurrentIM"; then
         hit=1
