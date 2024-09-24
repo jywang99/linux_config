@@ -16,3 +16,24 @@ These configs need additional steps to apply.
 1. [tmux](home/.config/tmux/README.md)
 2. [Arch packages](arch/README.md)
 
+## Copy configs to new system
+For copying configs to a system without internet connection.\
+**Prerequisite**: Configs are already applied on the current system.
+1. Run make command to generate a tarball
+```bash
+make tarball
+```
+2. Copy the tarball to the new system, and extract it
+```bash
+# Example
+scp ./dist/linux_config.tar.gz myhost:~/git
+ssh myhost
+cd git
+tar -xzf linux_config.tar.gz
+cd linux_config
+```
+3. Apply other configs in tarball
+```bash
+make untar
+```
+
