@@ -1,9 +1,11 @@
+bemoji
 blesh-git
+bluetui
+clipse
 google-chrome
+hyprpicker
 nvm
 rate-mirrors
 wechat-uos-qt
-wine-wow64
 yay
 yay-debug
-zoom
