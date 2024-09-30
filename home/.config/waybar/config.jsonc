@@ -19,7 +19,8 @@
             "icon-size": 18,
             "tooltip-format": "{title}",
             "on-click": "activate",
-            "on-click-middle": "close"
+            "on-click-middle": "close",
+            "active-first": true
         },
         "custom/fcitx": {
             "exec": "$HOME/.config/hypr/bin/monitorFcitx.sh",
@@ -44,6 +45,7 @@
         // center modules
         "hyprland/workspaces": {
             "format": "{icon}",
+            "show-special": true,
             "on-scroll-up": "hyprctl dispatch workspace e+1",
             "on-scroll-down": "hyprctl dispatch workspace e-1"
         },
