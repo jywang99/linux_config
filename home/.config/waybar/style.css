@@ -11,7 +11,6 @@
 
 * {
 	border: none;
-	border-radius: 10px;
     font-family: "UbuntuMono Nerd Font";
 	font-size: 15px;
 	min-height: 10px;
@@ -22,11 +21,11 @@ span {
 }
 
 #bluetooth, #taskbar, #submap, #custom-brightness, #clock, #custom-fcitx, #custom-player, #pulseaudio, #battery, #network, #workspaces, #keyboard-state {
-	margin-top: 6px;
+	margin-top: 3px;
 	margin-left: 8px;
 	padding-left: 10px;
 	padding-right: 10px;
-	margin-bottom: 0px;
+	margin-bottom: 3px;
 	border-radius: 10px;
 	transition: none;
 	color: @textcolor2;
@@ -34,7 +33,7 @@ span {
 }
 
 window#waybar {
-	background: transparent;
+	background: rgba(9, 8, 13,0.7);
 }
 
 #window {
@@ -116,8 +115,9 @@ window#waybar.empty #window {
 
 #custom-launcher {
 	font-size: 24px;
-	margin-top: 6px;
+	margin-top: 3px;
 	margin-left: 8px;
+	margin-bottom: 3px;
 	padding-left: 10px;
 	padding-right: 5px;
 	border-radius: 10px;
