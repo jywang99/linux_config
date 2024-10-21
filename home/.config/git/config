@@ -3,3 +3,6 @@
 	name = junyi.wang
 [diff]
 	tool = vimdiff
+[push]
+    autoSetupRemote = true
+

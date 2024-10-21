@@ -189,7 +189,7 @@ if [ -d "$FZF_DIR" ]; then
 fi
 
 # blesh
-BLESH="/usr/share/blesh/ble.sh"
+BLESH="/home/jy/.local/share/blesh/current/ble.sh"
 if [[ -f $BLESH ]]; then
     [[ $- == *i* ]] && source $BLESH
     ble-bind -m vi_imap -f 'C-c' discard-line
