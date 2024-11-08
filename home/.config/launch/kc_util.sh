@@ -6,6 +6,7 @@ alias kc='kubectl'
 alias kls='kc config get-contexts'
 alias kns='kc get namespace'
 
+alias kga='kubectl get all'
 alias kgp='kubectl get pods'
 alias kgd='kubectl get deployments'
 alias kgs='kubectl get services'

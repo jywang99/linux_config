@@ -207,3 +207,5 @@ fi
 # dirctory picker
 export FAV_DIRS=
 
+# k3s
+export KUBECONFIG=~/.kube/config
