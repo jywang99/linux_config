@@ -53,7 +53,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1="\n\[\e[01;33m\]\u\[\e[0m\]\[\e[00;37m\]@\[\e[0m\]\[\e[01;36m\]\h\[\e[0m\]\[\e[00;37m\] \t \[\e[0m\]\[\e[01;35m\]\w\[\e[0m\]\[\e[01;37m\] \[\e[0m\]\n$ "
+    PS1="\n\[\e[01;33m\]\u@\h\[\e[0m\]\[\e[00;37m\] \t \[\e[0m\]\[\e[01;35m\]\w\[\e[0m\]\[\e[01;37m\] \[\e[0m\]\n$ "
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -111,7 +111,7 @@ if command -v starship &> /dev/null; then
     eval "$(starship init bash)"
 # simple custom prompt
 else
-    PS1="\[\e[33m\]\u\[\e[m\]:\[\e[36m\]\w\[\e[m\]"
+    PS1="\[\e[33m\]\u@\h\[\e[m\]:\[\e[36m\]\w\[\e[m\]"
     PS1+="\[\e[90m\]{\`jobs | grep -E 'Running|Stopped' | wc -l\`}\[\e[m\]"
     PS1+="\\$ "
     export PS1
@@ -189,7 +189,7 @@ if [ -d "$FZF_DIR" ]; then
 fi
 
 # blesh
-BLESH="/home/jy/.local/share/blesh/current/ble.sh"
+BLESH="/usr/share/blesh/ble.sh"
 if [[ -f $BLESH ]]; then
     [[ $- == *i* ]] && source $BLESH
     ble-bind -m vi_imap -f 'C-c' discard-line
