@@ -159,12 +159,12 @@ alias tmux="tmux -u"
 alias pu='pushd'
 alias po='popd'
 alias ta='tmux attach-session || tmux new-session'
+alias watch='watch '
 
 # completion
 BASH_COMPLETION_DIR="/usr/share/bash-completion/completions"
 if [ -d "$BASH_COMPLETION_DIR" ]; then
     [ -f "$BASH_COMPLETION_DIR/git" ] && . "$BASH_COMPLETION_DIR/git"
-    [ -f "$BASH_COMPLETION_DIR/kubectl" ] && . "$BASH_COMPLETION_DIR/kubectl"
     [ -f "$BASH_COMPLETION_DIR/docker" ] && . "$BASH_COMPLETION_DIR/docker"
 fi
 # user-generated completion scirpts

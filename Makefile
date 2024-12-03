@@ -1,6 +1,6 @@
 user:
 	mkdir -p ~/.config/tmux/plugins
-    mkdir -p ~/.local/bin
+	mkdir -p ~/.local/bin/
 	stow -t ~/ home
 
 # make WSL resources available in C:\wsl\res
