@@ -124,13 +124,10 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # NVM
-NVM_SH="$HOME/.nvm/nvm.sh"
-if [[ -s $NVM_SH ]]; then
-    source $NVM_SH
-else
-    NVM_SH=/usr/share/nvm/init-nvm.sh
-    [ -s $NVM_SH ] && source $NVM_SH
-fi
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # nvm bash_completion
+
 
 # zoxide
 if command -v zoxide &> /dev/null; then
@@ -211,3 +208,4 @@ export FAV_DIRS=
 
 # k3s
 export KUBECONFIG=~/.kube/config
+

@@ -16,6 +16,14 @@ These configs need additional steps to apply.
 1. [tmux](home/.config/tmux/README.md)
 2. [Arch packages](arch/README.md)
 
+### Bash completion
+Bash completion for `git` and `docker` are enabled by default. To enable other completions, place scripts in `~/.config/bash-completion/` directory. Those scripts are sourced by `~/.bashrc`.
+
+Example for `kubectl` completion:
+```bash
+kubectl completion bash > ~/.config/bash-completion/kubectl
+```
+
 ## Copy configs to new system
 For copying configs to a system without internet connection.\
 **Prerequisite**: Configs are already applied on the current system.
