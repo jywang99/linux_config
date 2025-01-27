@@ -1,0 +1,13 @@
+fzf
+docker
+feh
+firefox
+fzf
+git
+mpv
+tmux
+vim
+stow
+zoxide
+ripgrep
+

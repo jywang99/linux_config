@@ -1,6 +1,5 @@
-# Linux Configs
-My Linux configuration files and scripts.\
-Some configs are in submodules.
+# Linux Config
+My Linux configuration files and scripts.
 
 ## Dotfiles
 My dotfiles are stored under `home` directory of this repository.\
@@ -13,8 +12,8 @@ make user
 
 ## Other configs
 These configs need additional steps to apply.
-1. [tmux](home/.config/tmux/README.md)
-2. [Arch packages](arch/README.md)
+1. [Packages](pkgs/README.md)
+2. [tmux](home/.config/tmux/README.md)
 
 ### Bash completion
 Bash completion for `git` and `docker` are enabled by default. To enable other completions, place scripts in `~/.config/bash-completion/` directory. Those scripts are sourced by `~/.bashrc`.
