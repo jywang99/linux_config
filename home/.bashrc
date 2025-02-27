@@ -26,9 +26,11 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# shell config
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
+stty -ixon
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -206,6 +208,6 @@ fi
 # dirctory picker
 export FAV_DIRS=
 
-# k3s
+# k8s
 export KUBECONFIG=~/.kube/config
 
