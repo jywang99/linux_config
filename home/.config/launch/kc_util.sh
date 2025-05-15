@@ -1,35 +1,34 @@
 #!/bin/bash
 
-alias kc='kubectl'
+alias k='kubectl'
 
 # Kubernetes command aliases
-alias kls='kc config get-contexts'
-alias kns='kc get namespace'
+alias kls='k config get-contexts'
+alias kns='k get namespace'
 
-alias kga='kubectl get all'
-alias kgp='kubectl get pods'
-alias kgd='kubectl get deployments'
-alias kgs='kubectl get services'
-alias kgn='kubectl get nodes'
-alias kge='kubectl get events'
-alias kgc='kubectl get configmap'
+alias kgp='k get pods'
+alias kgd='k get deployments'
+alias kgs='k get services'
+alias kgn='k get nodes'
+alias kge='k get events'
+alias kgc='k get configmap'
 
-alias kd='kubectl describe'
-alias kdp='kubectl describe pods'
-alias kdd='kubectl describe deployments'
-alias kds='kubectl describe services'
-alias kdn='kubectl describe nodes'
-alias kdc='kubectl describe configmap'
+alias kd='k describe'
+alias kdp='k describe pods'
+alias kdd='k describe deployments'
+alias kds='k describe services'
+alias kdn='k describe nodes'
+alias kdc='k describe configmap'
 
-alias ke='kubectl edit'
-alias kep='kubectl edit pod'
-alias ked='kubectl edit deployment'
-alias kes='kubectl edit service'
-alias ken='kubectl edit node'
-alias kec='kubectl edit configmap'
+alias ke='k edit'
+alias kep='k edit pod'
+alias ked='k edit deployment'
+alias kes='k edit service'
+alias ken='k edit node'
+alias kec='k edit configmap'
 
-alias ke='kubectl exec -it'
-alias klogs='kubectl logs'
+alias ke='k exec -it'
+alias klogs='k logs'
 
 kcs() {
     # Check if namespace argument is provided
@@ -50,27 +49,16 @@ kcs() {
 
     return 0
 }
+_kcs_completion() {
+    local curr_arg prev_arg
+    curr_arg="${COMP_WORDS[COMP_CWORD]}"
+    prev_arg="${COMP_WORDS[COMP_CWORD-1]}"
 
-kcdp() {
-    local partial_name="$1"
-    
-    # Get the list of pod names matching the partial name
-    local pod_list=$(kubectl get pods --no-headers -o custom-columns=":metadata.name"|grep $partial_name)
-
-    # Count the number of matching pods
-    local pod_count=$(echo "$pod_list" | wc -w)
-
-    if [[ $pod_count -eq 0 ]]; then
-        echo "No pods found matching the partial name '$partial_name'"
-        return 1
+    if [[ $COMP_CWORD -eq 1 ]]; then
+        COMPREPLY=( $(compgen -W "$(kubectl get ns -o jsonpath='{.items[*].metadata.name}')" -- "$curr_arg") )
+    elif [[ $COMP_CWORD -eq 2 ]]; then
+        COMPREPLY=( $(compgen -W "$(kubectl config get-contexts -o name)" -- "$curr_arg") )
     fi
-    if [[ $pod_count -gt 1 ]]; then
-        echo "Multiple pods found matching the partial name '$partial_name'. Please refine your search."
-        return 1
-    fi
-
-    # Delete the single matching pod
-    kubectl delete pod $(echo "$pod_list")
-    echo "Pod deleted successfully."
 }
+complete -F _kcs_completion kcs
 
