@@ -175,8 +175,6 @@ if [ -d "$USR_COMP_DIR" ]; then
         . $f
     done
 fi
-# completion for aliases
-complete -F __start_kubectl kc
 
 # keybindings
 bind -x '"\ef": "cd && $(__fzf_cd__)"'
