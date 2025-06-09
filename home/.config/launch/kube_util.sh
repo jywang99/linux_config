@@ -1,6 +1,9 @@
 #!/bin/bash
 
+export KUBECONFIG=~/.kube/config
+
 alias k='kubectl'
+complete -F __start_kubectl k
 
 # Kubernetes command aliases
 alias kls='k config get-contexts'

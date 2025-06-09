@@ -1,3 +1,5 @@
+export FAV_DIRS=
+
 convert_colon_list_to_array() {
     local colon_list=$1
     local IFS=':'
