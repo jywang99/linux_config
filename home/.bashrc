@@ -196,7 +196,27 @@ if [[ -f $BLESH ]]; then
 	ble-face auto_complete='fg=240,underline,italic'
 fi
 
-# other user scripts
+# Go
+if command -v go &> /dev/null; then
+    goBinPath=$(go env GOPATH)/bin
+    export PATH=$PATH:$goBinPath
+fi
+
+# Python
+PYENV_ROOT="$HOME/.pyenv"
+if [ -d "$PYENV_ROOT" ]; then
+    export PYENV_ROOT
+    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
+
+# User utilities
+USER_BIN="$HOME/.local/bin"
+if [ -d "$USER_BIN" ]; then
+    export PATH=$PATH:$USER_BIN
+fi
+
+# other user scripts (launched at bash start)
 SCRIPTS_DIR="$XDG_CONFIG_HOME/launch"
 if [ -d "$SCRIPTS_DIR" ]; then
     for f in $SCRIPTS_DIR/*; do

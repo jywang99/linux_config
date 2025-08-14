@@ -1,6 +1,18 @@
 # Linux Config
 My Linux configuration files and scripts.
 
+## Packages
+Required:
+1. build-essential
+2. git
+3. stow
+4. [nodejs](https://nodejs.org/en/download)
+
+Optional (recommended):
+1. ripgrep
+2. fzf
+3. zoxide
+
 ## Dotfiles
 My dotfiles are stored under `home` directory of this repository.\
 Steps to apply dotfiles:
@@ -12,16 +24,11 @@ make user
 
 ## Other configs
 These configs need additional steps to apply.
-1. [Packages](pkgs/README.md)
 2. [tmux](home/.config/tmux/README.md)
 
-### Bash completion
-Bash completion for `git` and `docker` are enabled by default. To enable other completions, place scripts in `~/.config/bash-completion/` directory. Those scripts are sourced by `~/.bashrc`.
-
-Example for `kubectl` completion:
-```bash
-kubectl completion bash > ~/.config/bash-completion/kubectl
-```
+## Coding languages
+1. Python (recommended: [pyenv](https://github.com/pyenv/pyenv))
+2. [Go](https://go.dev/doc/install) - make sure `go` is executable. `.bashrc` will automatically make `$(go env GOPATH)/bin` available in `PATH`.
 
 ## Copy configs to new system
 For copying configs to a system without internet connection.\
@@ -42,5 +49,13 @@ cd linux_config
 3. Apply other configs in tarball
 ```bash
 make untar
+```
+
+## Bash completion
+Bash completion for `git` and `docker` are enabled by default. To enable other completions, place scripts in `~/.config/bash-completion/` directory. Those scripts are sourced by `~/.bashrc`.
+
+For `kubectl`:
+```bash
+kubectl completion bash > ~/.config/bash-completion/kubectl
 ```
 
