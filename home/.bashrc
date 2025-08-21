@@ -130,7 +130,6 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # nvm bash_completion
 
-
 # zoxide
 if command -v zoxide &> /dev/null; then
     eval "$(zoxide init bash)"
@@ -162,40 +161,6 @@ alias po='popd'
 alias ta='tmux attach-session || tmux new-session'
 alias watch='watch '
 
-# completion
-BASH_COMPLETION_DIR="/usr/share/bash-completion/completions"
-if [ -d "$BASH_COMPLETION_DIR" ]; then
-    [ -f "$BASH_COMPLETION_DIR/git" ] && . "$BASH_COMPLETION_DIR/git"
-    [ -f "$BASH_COMPLETION_DIR/docker" ] && . "$BASH_COMPLETION_DIR/docker"
-fi
-# user-generated completion scirpts
-USR_COMP_DIR="$XDG_CONFIG_HOME/bash-completion"
-if [ -d "$USR_COMP_DIR" ]; then
-    for f in $USR_COMP_DIR/*; do
-        . $f
-    done
-fi
-
-# keybindings
-bind -x '"\ef": "cd && $(__fzf_cd__)"'
-bind 'set keyseq-timeout 0'
-
-# fzf
-FZF_DIR="/usr/share/fzf"
-if [ -d "$FZF_DIR" ]; then
-    . "$FZF_DIR/key-bindings.bash"
-    . "$FZF_DIR/completion.bash"
-fi
-
-# blesh
-BLESH="/usr/share/blesh/ble.sh"
-if [[ -f $BLESH ]]; then
-    [[ $- == *i* ]] && source $BLESH
-    ble-bind -m vi_imap -f 'C-c' discard-line
-    ble-bind -m vi_nmap -f 'C-c' discard-line
-	ble-face auto_complete='fg=240,underline,italic'
-fi
-
 # Go
 if command -v go &> /dev/null; then
     goBinPath=$(go env GOPATH)/bin
@@ -210,12 +175,6 @@ if [ -d "$PYENV_ROOT" ]; then
     eval "$(pyenv init -)"
 fi
 
-# User utilities
-USER_BIN="$HOME/.local/bin"
-if [ -d "$USER_BIN" ]; then
-    export PATH=$PATH:$USER_BIN
-fi
-
 # other user scripts (launched at bash start)
 SCRIPTS_DIR="$XDG_CONFIG_HOME/launch"
 if [ -d "$SCRIPTS_DIR" ]; then
@@ -223,4 +182,44 @@ if [ -d "$SCRIPTS_DIR" ]; then
         . $f
     done
 fi
+
+# blesh
+: "${BLESH:=/usr/share/blesh/ble.sh}"
+if [[ -f $BLESH ]]; then
+    [[ $- == *i* ]] && source $BLESH
+    ble-bind -m vi_imap -f 'C-c' discard-line
+    ble-bind -m vi_nmap -f 'C-c' discard-line
+	ble-face auto_complete='fg=240,underline,italic'
+fi
+
+# fzf
+: "${FZF_DIR:=/usr/share/fzf}"
+if [ -d "$FZF_DIR" ]; then
+    [ -f "$FZF_DIR/key-bindings.bash" ] && . "$FZF_DIR/key-bindings.bash"
+    [ -f "$FZF_DIR/completion.bash" ] && . "$FZF_DIR/completion.bash"
+fi
+
+# completion
+: "${BASH_COMPLETION_DIR:=$XDG_DATA_HOME/bash-completion/completions}"
+if [ -d "$BASH_COMPLETION_DIR" ]; then
+    [ -f "$BASH_COMPLETION_DIR/git" ] && . "$BASH_COMPLETION_DIR/git"
+    [ -f "$BASH_COMPLETION_DIR/docker" ] && . "$BASH_COMPLETION_DIR/docker"
+fi
+# user-generated completion scirpts
+USR_COMP_DIR="$XDG_CONFIG_HOME/bash-completion"
+if [ -d "$USR_COMP_DIR" ]; then
+    for f in $USR_COMP_DIR/*; do
+        . $f
+    done
+fi
+
+# User utilities
+USER_BIN="$HOME/.local/bin"
+if [ -d "$USER_BIN" ]; then
+    export PATH=$PATH:$USER_BIN
+fi
+
+# keybindings
+bind -x '"\ef": "cd && $(__fzf_cd__)"'
+bind 'set keyseq-timeout 0'
 
