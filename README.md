@@ -3,15 +3,14 @@ My Linux configuration files and scripts.
 
 ## Packages
 Required:
-1. build-essential
-2. git
-3. stow
-4. [nodejs](https://nodejs.org/en/download)
+```
+build-essential git stow
+```
 
 Optional (recommended):
-1. ripgrep
-2. fzf
-3. zoxide
+```
+ripgrep fzf zoxide nodejs tmux vim neovim
+```
 
 ## Dotfiles
 My dotfiles are stored under `home` directory of this repository.\

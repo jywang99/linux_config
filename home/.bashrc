@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc) for examples
 
 export TERM=xterm-256color
+export LANG=C.UTF-8
+export LC_ALL=C.UTF-8
 
 export XDG_CONFIG_HOME=$HOME/.config
 
