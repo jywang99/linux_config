@@ -4,12 +4,17 @@ My Linux configuration files and scripts.
 ## Packages
 Required:
 ```
-build-essential git stow
+build-essential git stow nodejs npm
 ```
 
 Optional (recommended):
 ```
 ripgrep fzf zoxide nodejs tmux vim neovim
+```
+
+Optional:
+```
+starship nvm
 ```
 
 ## Dotfiles
