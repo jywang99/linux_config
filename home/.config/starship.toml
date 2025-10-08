@@ -2,6 +2,7 @@ format = """
 $username\
 $hostname\
 $directory\
+$python\
 $jobs\
 $character\
 """
@@ -9,6 +10,7 @@ $character\
 add_newline = false
 palette = "catppuccin_mocha"
 command_timeout = 1000
+
 
 [character]
 success_symbol = "[\\$](bold green)"
@@ -21,7 +23,7 @@ style_user = "bold yellow"
 
 [hostname]
 ssh_only = true
-format = "[@$hostname]($style)"
+format = ":[$hostname]($style)"
 trim_at = "-"
 style = "bold yellow"
 
@@ -29,11 +31,11 @@ style = "bold yellow"
 truncation_length = 0
 truncate_to_repo = false
 home_symbol = "~"
-format = "[:$path]($style)"
+format = ":[$path]($style)"
 style = "blue"
 
 [git_branch]
-format = "[$branch(:$remote_branch)]($style)"
+format = "[$branch($remote_branch)]($style)"
 style = "mauve"
 
 [git_status]
@@ -42,8 +44,14 @@ style = "mauve"
 
 [jobs]
 symbol = "+"
-format = "[{$symbol$number}]($style)"
+format = ":[{$symbol$number}]($style)"
 style = "dimmed maroon"
+
+[python]
+disabled = false
+format = ":[$virtualenv]($style)"
+style = "dimmed green"
+python_binary = "python3"
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
