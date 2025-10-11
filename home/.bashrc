@@ -162,6 +162,8 @@ alias pu='pushd'
 alias po='popd'
 alias ta='tmux attach-session || tmux new-session'
 alias watch='watch '
+alias wlc='wl-copy'
+alias wlp='wl-paste'
 
 # Go
 if command -v go &> /dev/null; then
@@ -225,4 +227,3 @@ fi
 bind -x '"\ef": "cd && $(__fzf_cd__)"'
 bind 'set keyseq-timeout 0'
 
-. "$HOME/.cargo/env"
